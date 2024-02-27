@@ -1,5 +1,5 @@
 //
-// Created by allxs on 20/02/2024.
+// Created by allxs on 19/02/2024.
 //
 
 #ifndef PROYECTO_AED_NODO_H

@@ -2,8 +2,9 @@
 // Created by allxs on 19/02/2024.
 //
 
-#ifndef PROYECTO_AED_TREAP_H
-#define PROYECTO_AED_TREAP_H
+#ifndef PROYECTO_AED_TREAP_MANUAL_H
+#define PROYECTO_AED_TREAP_MANUAL_H
+
 
 #include "nodo.h"
 #include <iostream>
@@ -31,18 +32,18 @@ private:
         return temp;
     }
 
-    std::shared_ptr<Nodo<T>> insertar(std::shared_ptr<Nodo<T>> nodo, T valor) {
+    std::shared_ptr<Nodo<T>> insertar(std::shared_ptr<Nodo<T>> nodo, T valor, int prioridad) {
         // Si el nodo es nulo, creamos un nuevo nodo
-        if (!nodo) return std::make_shared<Nodo<T>>(valor, rand() % 100); // Se asigna un numero aleatorio 0-99
+        if (!nodo) return std::make_shared<Nodo<T>>(valor, prioridad);
 
         // Si el valor es menor que el valor del nodo, lo insertamos en la izquierda
         if (valor < nodo->valor) {
-            nodo->izquierda = insertar(nodo->izquierda, valor);
+            nodo->izquierda = insertar(nodo->izquierda, valor, prioridad);
             if (nodo->izquierda->prioridad > nodo->prioridad) nodo = rotarDerecha(nodo);
         }
             // Si el valor es mayor o igual, lo insertamos en la derecha
         else {
-            nodo->derecha = insertar(nodo->derecha, valor);
+            nodo->derecha = insertar(nodo->derecha, valor, prioridad);
             if (nodo->derecha->prioridad > nodo->prioridad) nodo = rotarIzquierda(nodo);
         }
 
@@ -181,7 +182,7 @@ public:
     ~Treap() = default;
 
     // Funciones públicas
-    void insertar(T valor) { raiz = insertar(raiz, valor); }
+    void insertar(T valor, int prioridad) { raiz = insertar(raiz, valor, prioridad); }
     void borrar(T valor) { raiz = borrar(raiz, valor); }
     void display() {
         display(raiz, "", "");
@@ -200,4 +201,6 @@ public:
 
 
 
-#endif //PROYECTO_AED_TREAP_H
+
+
+#endif //PROYECTO_AED_TREAP_MANUAL_H
